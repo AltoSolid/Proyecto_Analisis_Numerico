@@ -1,0 +1,27 @@
+Pseudocódigo para el algoritmo correspondiente al método de búsquedas incrementales en el cual se buscan raíces o 
+intervalos donde se encuentran las raíces de una ecuación del tipo f(x)=0.
+
+Data: f (función), X0 (valor inicial), ∆ (Incremento), i (iteraciones)
+Result: Raíz r, Intervalo [a,b] o mensaje de fallo
+
+Leer X0, ∆ , i 
+Y0 <- f(X0)
+if Y0 = 0 then
+   Mostrar X0 es una raíz
+else 
+   X1 <- X0 + ∆ 
+   Y1 <- f(X1)
+   contador <- 1
+   while Y1 * Y0 > 0 ∧ contador < i do
+        X0 <- X1
+        Y0 <- Y1
+        X1 <- X0 + ∆ 
+        Y1 <- f(X1)
+        contador <- contador + 1
+    if Y1 == 0 then
+        Mostrar X1 es una raíz
+    else
+        if Y1 * Y0 < 0 then 
+            Mostrar [X0, X1] es un intervalo valido 
+        else
+            Mostrar El metodo falló, no se encuentra intervalo 
