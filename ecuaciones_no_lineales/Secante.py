@@ -31,10 +31,10 @@ class Secante:
 
                     #Error A
                     if(err_type):
-                        error = math.fabs(xi-xi_1)           #By using math.fabs(x) se puede generar un error cuando x es complejo
+                        error = math.fabs(xi-xi_1)           #Usando math.fabs(x) se puede generar un error cuando x es complejo
                     #Error R
                     else:
-                        error = math.fabs((xi-xi_1)/xi)      #Al usar math.fabs(x) se puede generar un error cuando x es complejo
+                        error = math.fabs((xi-xi_1)/xi)      #Usando usar math.fabs(x) se puede generar un error cuando x es complejo
 
                     counter +=1
                     self.valores.append([counter, xi, '%E' %function.evaluar(xi), '%E' %difY, '%E' %error])
@@ -49,9 +49,9 @@ class Secante:
                     self.raiz = f"{xi} es una aproximación a la raiz"
                 else:
                     self.raiz = "Número de iteraciones se excedió"
-        #Exception handling, specially:
-        #      - the zero division that can happen whe subtracting F(xi_1)-F(Xi_2)
-        #      - the type error that can be generated when converting a complex number with math.fabs()
+                    
+        #Exception manejo, especiall:
+        #      - La division por cero puede suceder F(xi_1)-F(Xi_2)
 
         except ZeroDivisionError:
             print("Dividiendo por cero")
