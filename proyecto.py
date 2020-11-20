@@ -134,6 +134,7 @@ def llamarSecante(funcion, xa, tolera):
 def pintarRaicesMultiples():
     pass
 
+
 def llamarRaicesMultiples():
     pass
     
