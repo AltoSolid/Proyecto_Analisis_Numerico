@@ -6,7 +6,9 @@ import numpy as np
 
 def reglafalsa(funcion,a, b, tolera=0.001):
     fx = lambda x: eval(funcion)
-
+    a = eval(a)
+    b = eval(b)
+    tolera = eval(tolera)
     # PROCEDIMIENTO
     tramo = abs(b-a)
     while not(tramo<=tolera):
@@ -24,6 +26,7 @@ def reglafalsa(funcion,a, b, tolera=0.001):
     raiz = c
 
     # SALIDA
-    print("Raiz {0}".format(raiz))
+    return c
+    #print("Raiz {0}".format(raiz))
 
-reglafalsa("x*3 + 4*x*2 - 10" ,1,2)
+#reglafalsa("x**3 + 4*x**2 - 10" ,1,2)

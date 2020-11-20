@@ -33,8 +33,8 @@ def biseccion(funcion,a, b, tolera=0.001):
         tramo = b-a
 
     # SALIDA
-    print('       raiz en: ', c)
-    print('error en tramo: ', tramo)
+    #print('       raiz en: ', c)
+    #print('error en tramo: ', tramo)
     return (c,tramo)
 
 #biseccion("x*3 + 4*x*2 - 10" ,"1","2")

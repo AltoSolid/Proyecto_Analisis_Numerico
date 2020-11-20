@@ -5,6 +5,8 @@ import numpy as np
 
 def secante_tabla(funcion,xa,tolera):
     fx = lambda x: eval(funcion)
+    xa = eval(xa)
+    tolera = eval(tolera)
     dx = 4*tolera
     xb = xa + dx
     tramo = dx
@@ -25,23 +27,23 @@ def secante_tabla(funcion,xa,tolera):
 
 # PROGRAMA ####################
 # INGRESO
-fx = lambda x: x*3 + 4*x*2 - 10
+"""fx = lambda x: x*3 + 4*x*2 - 10
 
 a = 1 ; b = 2
 xa = 1.5
 tolera = 0.001
-tramos = 100
+tramos = 100"""
 
 # PROCEDIMIENTO
-tabla = secante_tabla("x*3 + 4*x*2 - 10",xa,0.001)
+#tabla = secante_tabla("x**3 + 4*x**2 - 10",xa,0.001)
 # n = len(tabla)
 # raiz = tabla[n-1,2]
 
-raiz = tabla
+#raiz = tabla
 
 # SALIDA
 # np.set_printoptions(precision=4)
 # print('[xa ,\t xb , \t xc , \t tramo]')
 # for i in range(0,n,1):
 #     print(tabla[i])
-print('raiz en: ', raiz)
+#print('raiz en: ', raiz)

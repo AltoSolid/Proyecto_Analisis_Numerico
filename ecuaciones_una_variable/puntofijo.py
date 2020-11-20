@@ -7,6 +7,8 @@ import numpy as np
 
 def puntofijo(funcion,a,tolera, iteramax = 15):
     gx = lambda x: eval(funcion)
+    a = eval(a)
+    tolera = eval(tolera)
     i = 1 # iteración
     b = gx(a)
     tramo = abs(b-a)
@@ -24,7 +26,7 @@ def puntofijo(funcion,a,tolera, iteramax = 15):
 # PROGRAMA ---------
 
 # INGRESO
-fx = lambda x: np.exp(-x) - x
+"""fx = lambda x: np.exp(-x) - x
 gx = lambda x: np.exp(-x)
 
 a = 0       # intervalo
@@ -33,10 +35,10 @@ tolera = 0.001
 iteramax  = 15      # itera máximo
 muestras = 51  # gráfico
 
-tramos = 51
+tramos = 51"""
 
 # PROCEDIMIENTO
-respuesta = puntofijo(" ",0,0.001)
+#respuesta = puntofijo("x**3+4*x**2-10",0,0.001)
 
 # SALIDA
-print(respuesta)
+#print(respuesta)
