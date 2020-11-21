@@ -7,12 +7,12 @@ def jacobi(matrizA, matrizB):
     # initialize the RHS vector
     b = np.array(eval(matrizB))
     # prints the system
-    print("System:" )
+    #print("System:" )
 
-    for i in range(A.shape[0]):
+    """for i in range(A.shape[0]):
         row = ["{}*x{}" .format(A[i, j], j + 1) for j in range(A.shape[1])]
         print(" + ".join(row), "=", b[i])
-    print(" ")
+    print(" ")"""
     x = np.zeros_like (b)
 
     for it_count in range(ITERATION_LIMIT ):
@@ -26,10 +26,11 @@ def jacobi(matrizA, matrizB):
             break
         x = x_new
 
-    print("Solution:" )
-    print(x)
+    #print("Solution:" )
+    #print(x)
     error = np.dot(A, x) - b
-    print("Error:" )
-    print(error)
+    #print("Error:" )
+    #print(error)
+    return(x, error)
 
-jacobi("[[10., -1., 2., 0.],[-1., 11., -1., 3.],[2., -1., 10., -1.], [0.0, 3., -1., 8.]]","[6., 25., -11., 15.]")
+#jacobi("[[10., -1., 2., 0.],[-1., 11., -1., 3.],[2., -1., 10., -1.], [0.0, 3., -1., 8.]]","[6., 25., -11., 15.]")

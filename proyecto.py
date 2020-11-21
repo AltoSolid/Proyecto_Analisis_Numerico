@@ -6,6 +6,10 @@ from ecuaciones_una_variable.reglafalsa import reglafalsa
 from ecuaciones_una_variable.puntofijo import puntofijo
 from ecuaciones_una_variable.newton import newton
 from ecuaciones_una_variable.secante import secante_tabla
+from sistemas_de_ecuaciones.gauss import gauss
+from sistemas_de_ecuaciones.gaussSeidel import gauss_seidel
+from sistemas_de_ecuaciones.jacobi import jacobi
+from sistemas_de_ecuaciones.pivoteoParcial import pivoteoParcial
 
 def pintarBiseccion():
     ventanaBiseccion = tk.Toplevel(window)
@@ -173,16 +177,52 @@ def llamarRaicesMultiples():
     pass
     
 def pintarEliminacionGaussiana():
-    pass
+    ventanaEliminacionGauss = tk.Toplevel(window)
+    ventanaEliminacionGauss.title("Método de Eliminación Gaussiana")
+    labelTitulo = tk.Label(ventanaEliminacionGauss, text="Método de Eliminación Gaussiana", fg="black", font=("Arial", 15))
+    labelMatrizA = tk.Label(ventanaEliminacionGauss, text="Ingrese la Matriz A", fg="black", font=("Arial", 10))
+    entradaMatrizA = ttk.Entry(ventanaEliminacionGauss)
+    espacio = tk.Label(ventanaEliminacionGauss, text="")
+    boton = tk.Button(ventanaEliminacionGauss, text = "Calcular", command = lambda: llamarEliminacionGaussiana(entradaMatrizA.get(), ventanaEliminacionGauss))
+    
+    labelTitulo.pack()
+    labelMatrizA.pack()
+    entradaMatrizA.pack()
+    espacio.pack()
+    boton.pack()
 
-def llamarEliminacionGaussiana():
-    pass
+def llamarEliminacionGaussiana(matrizA, ventanaEliminacionGaussiana):
+    respuesta = gauss(matrizA)
+    labelMensaje = tk.Label(ventanaEliminacionGaussiana, text="La solución del sistema es:", fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaEliminacionGaussiana, text=respuesta, fg="black", font=("Arial", 10))
+    labelMensaje.pack()
+    labelSolucion.pack()
     
 def pintarPivoteoParcial():
-    pass
+    ventanaPivoteoParcial = tk.Toplevel(window)
+    ventanaPivoteoParcial.title("Método de Pivote Parcial")
+    labelTitulo = tk.Label(ventanaPivoteoParcial, text="Método de Pivote Parcial", fg="black", font=("Arial", 15))
+    labelMatrizA = tk.Label(ventanaPivoteoParcial, text="Ingrese la Matriz A", fg="black", font=("Arial", 10))
+    entradaMatrizA = ttk.Entry(ventanaPivoteoParcial)
+    labelMatrizB = tk.Label(ventanaPivoteoParcial, text="Ingrese la Matriz B", fg="black", font=("Arial", 10))
+    entradaMatrizB = ttk.Entry(ventanaPivoteoParcial)
+    espacio = tk.Label(ventanaPivoteoParcial, text="")
+    boton = tk.Button(ventanaPivoteoParcial, text = "Calcular", command = lambda: llamarPivoteoParcial(entradaMatrizA.get(), entradaMatrizB.get(), ventanaPivoteoParcial))
+    
+    labelTitulo.pack()
+    labelMatrizA.pack()
+    entradaMatrizA.pack()
+    labelMatrizB.pack()
+    entradaMatrizB.pack()
+    espacio.pack()
+    boton.pack()
 
-def llamarPivoteoParcial():
-    pass
+def llamarPivoteoParcial(matrizA, matrizB, ventanaPivoteoParcial):
+    respuesta = pivoteoParcial(matrizA, matrizB)
+    labelMensaje = tk.Label(ventanaPivoteoParcial, text="La solución del sistema es:", fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaPivoteoParcial, text=respuesta, fg="black", font=("Arial", 10))
+    labelMensaje.pack()
+    labelSolucion.pack()
     
 def pintarPivoteoTotal():
     pass
@@ -215,16 +255,68 @@ def llamarDolittle():
     pass
     
 def pintarJacobi():
-    pass
+    ventanaJacobi = tk.Toplevel(window)
+    ventanaJacobi.title("Método de Jacobi")
+    labelTitulo = tk.Label(ventanaJacobi, text="Método de Jacobi", fg="black", font=("Arial", 15))
+    labelMatrizA = tk.Label(ventanaJacobi, text="Ingrese la Matriz A", fg="black", font=("Arial", 10))
+    entradaMatrizA = ttk.Entry(ventanaJacobi)
+    labelMatrizB = tk.Label(ventanaJacobi, text="Ingrese la Matriz B", fg="black", font=("Arial", 10))
+    entradaMatrizB = ttk.Entry(ventanaJacobi)
+    espacio = tk.Label(ventanaJacobi, text="")
+    boton = tk.Button(ventanaJacobi, text = "Calcular", command = lambda: llamarJacobi(entradaMatrizA.get(), entradaMatrizB.get(), ventanaJacobi))
+    
+    labelTitulo.pack()
+    labelMatrizA.pack()
+    entradaMatrizA.pack()
+    labelMatrizB.pack()
+    entradaMatrizB.pack()
+    espacio.pack()
+    boton.pack()
 
-def llamarJacobi():
-    pass
+def llamarJacobi(matrizA, matrizB, ventanaJacobi):
+    respuesta = jacobi(matrizA, matrizB)
+    labelMensaje = tk.Label(ventanaJacobi, text="La solución del sistema es: ", fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaJacobi, text=respuesta[0], fg="black", font=("Arial", 10))
+    labelMensaje2 = tk.Label(ventanaJacobi, text="Con error de: ", fg="black", font=("Arial", 10))
+    labelError = tk.Label(ventanaJacobi, text=respuesta[1], fg="black", font=("Arial", 10))
+    labelMensaje.pack()
+    labelSolucion.pack()
+    labelMensaje2.pack()
+    labelError.pack()
     
 def pintarGaussSeidel():
-    pass
+    ventanaGaussSeidel = tk.Toplevel(window)
+    ventanaGaussSeidel.title("Método de Gauss Seidel")
+    labelTitulo = tk.Label(ventanaGaussSeidel, text="Método de Gauss Seidel", fg="black", font=("Arial", 15))
+    labelMatrizA = tk.Label(ventanaGaussSeidel, text="Ingrese la Matriz A", fg="black", font=("Arial", 10))
+    entradaMatrizA = ttk.Entry(ventanaGaussSeidel)
+    labelMatrizB = tk.Label(ventanaGaussSeidel, text="Ingrese la Matriz B", fg="black", font=("Arial", 10))
+    entradaMatrizB = ttk.Entry(ventanaGaussSeidel)
+    labelVector = tk.Label(ventanaGaussSeidel, text="Ingrese el vector inicial", fg="black", font=("Arial", 10))
+    entradaVector = ttk.Entry(ventanaGaussSeidel)
+    labelTolerancia = tk.Label(ventanaGaussSeidel, text="Ingrese la tolerancia", fg="black", font=("Arial", 10))
+    entradaTolera = ttk.Entry(ventanaGaussSeidel)
+    espacio = tk.Label(ventanaGaussSeidel, text="")
+    boton = tk.Button(ventanaGaussSeidel, text = "Calcular", command = lambda: llamarGaussSeidel(entradaMatrizA.get(), entradaMatrizB.get(), entradaVector.get(), entradaTolera.get(),ventanaGaussSeidel))
+    
+    labelTitulo.pack()
+    labelMatrizA.pack()
+    entradaMatrizA.pack()
+    labelMatrizB.pack()
+    entradaMatrizB.pack()
+    labelVector.pack()
+    entradaVector.pack()
+    labelTolerancia.pack()
+    entradaTolera.pack()
+    espacio.pack()
+    boton.pack()
 
-def llamarGaussSeidel():
-    pass
+def llamarGaussSeidel(matrizA, matrizB, x0, tolera, ventanaGaussSeidel):
+    respuesta = gauss_seidel(matrizA, matrizB, x0, tolera)
+    labelMensaje = tk.Label(ventanaGaussSeidel, text="La solución del sistema es:", fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaGaussSeidel, text=respuesta, fg="black", font=("Arial", 10))
+    labelMensaje.pack()
+    labelSolucion.pack()
     
 def pintarVandermonde():
     pass

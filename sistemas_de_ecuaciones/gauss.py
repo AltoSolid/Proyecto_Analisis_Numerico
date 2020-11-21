@@ -15,7 +15,7 @@ def gauss(matrizA):
 
     #Orden de la matriz
     orden=len(matriz) 
-    mostrarMatriz(matriz,orden);    
+    #mostrarMatriz(matriz,orden);    
     #Recorrer la matriz 
     for j in range(0,orden+1):
         for i in range(0, orden):
@@ -34,9 +34,11 @@ def gauss(matrizA):
         #Obtener los valores de las variables
         x[i-1]=((matriz[i-1][orden]-suma)/matriz[i-1][i-1])	
     #Mostrar los valores de las variables
+    respuesta = ""
     for i in range(0,orden):
-        print("x"+str(i)+" = "+str(x[i]))
-
+        respuesta += ("x"+str(i)+"="+str(x[i])+" ")
+            
+    return respuesta
 
     # # Imprimir matriz
     # for i in range(0,orden):

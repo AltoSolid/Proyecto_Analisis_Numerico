@@ -12,6 +12,7 @@ def gauss_seidel(matrizA, matrizB, x0 , tolera):
     B = np.array(eval(matrizB))
 
     X0  = np.array(eval(x0))
+    tolera = eval(tolera)
     iteramax = 100
 
     # PROCEDIMIENTO
@@ -51,11 +52,12 @@ def gauss_seidel(matrizA, matrizB, x0 , tolera):
     # revisa respuesta
     verifica = np.dot(A,X)
 
+    return X
     # SALIDA
-    print('respuesta X: ')
-    print(X)
-    print('verificar A.X=B: ')
-    print(verifica)
+    #print('respuesta X: ')
+    #print(X)
+    #print('verificar A.X=B: ')
+    #print(verifica)
 
 
-gauss_seidel("[[3. , -0.1, -0.2], [0.1,  7  , -0.3],[0.3, -0.2, 10  ]]", "[7.85,-19.3,71.4]","[0.,0.,0.]",  0.00001)
+#gauss_seidel("[[3. , -0.1, -0.2], [0.1,  7  , -0.3],[0.3, -0.2, 10  ]]", "[7.85,-19.3,71.4]","[0.,0.,0.]",  0.00001)

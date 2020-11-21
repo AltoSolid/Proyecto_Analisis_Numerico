@@ -62,13 +62,14 @@ def pivoteoParcial(matrizA, matrizB):
 
 
     # SALIDA
-    print('Matriz aumentada:')
+    """print('Matriz aumentada:')
     print(AB0)
     print('Pivoteo parcial por filas')
     print(AB1)
     print('eliminación hacia adelante')
     print(AB)
     print('solución: ')
-    print(X)
+    print(X)"""
+    return X
 
-pivoteoParcial("[[4,2,5],[2,5,8],[5,4,3]]", "[[60.70],[92.90],[56.30]]")
+#pivoteoParcial("[[4,2,5],[2,5,8],[5,4,3]]", "[[60.70],[92.90],[56.30]]")
