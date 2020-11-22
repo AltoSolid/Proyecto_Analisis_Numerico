@@ -6,10 +6,13 @@ from ecuaciones_una_variable.reglafalsa import reglafalsa
 from ecuaciones_una_variable.puntofijo import puntofijo
 from ecuaciones_una_variable.newton import newton
 from ecuaciones_una_variable.secante import secante_tabla
+from ecuaciones_una_variable.raices_multiples import raicesMultiples
+
 from sistemas_de_ecuaciones.gauss import gauss
 from sistemas_de_ecuaciones.gaussSeidel import gauss_seidel
 from sistemas_de_ecuaciones.jacobi import jacobi
 from sistemas_de_ecuaciones.pivoteoParcial import pivoteoParcial
+
 
 def pintarBiseccion():
     ventanaBiseccion = tk.Toplevel(window)
@@ -171,10 +174,44 @@ def llamarSecante(funcion, xa, tolera, ventanaSecante):
     labelRaiz.pack()
     
 def pintarRaicesMultiples():
-    pass
+    ventanaRaicesMultiples = tk.Toplevel(window)
+    ventanaRaicesMultiples.title("Método de Raices múltiples")
+    labelTitulo = tk.Label(ventanaRaicesMultiples, text="Método de Raices múltiples", fg="black", font=("Arial", 15))
+    labelFuncion = tk.Label(ventanaRaicesMultiples, text="Ingrese la función", fg="black", font=("Arial", 10))
+    entradaFuncion = ttk.Entry(ventanaRaicesMultiples)
+    labelDf = tk.Label(ventanaRaicesMultiples, text="Ingrese la primera derivada", fg="black", font=("Arial", 10))
+    entradaDf = ttk.Entry(ventanaRaicesMultiples)
+    labelDDf = tk.Label(ventanaRaicesMultiples, text="Ingrese la segunda derivada", fg="black", font=("Arial", 10))
+    entradaDDf = ttk.Entry(ventanaRaicesMultiples)
+    labelA = tk.Label(ventanaRaicesMultiples, text="Ingrese la el limite inferior", fg="black", font=("Arial", 10))
+    entradaA = ttk.Entry(ventanaRaicesMultiples)
+    labelTolerancia = tk.Label(ventanaRaicesMultiples, text="Ingrese la tolerancia", fg="black", font=("Arial", 10))
+    entradaTolera = ttk.Entry(ventanaRaicesMultiples)
+    espacio = tk.Label(ventanaRaicesMultiples, text="")
+    boton = tk.Button(ventanaRaicesMultiples, text = "Calcular", command = lambda: llamarRaicesMultiples(entradaFuncion.get(), entradaDf.get(), entradaDDf.get(), entradaA.get(), entradaTolera.get(), ventanaRaicesMultiples))
+    
+    labelTitulo.pack()
+    labelFuncion.pack()
+    entradaFuncion.pack()
+    labelDf.pack()
+    entradaDf.pack()
+    labelDDf.pack()
+    entradaDDf.pack()
+    labelA.pack()
+    entradaA.pack()
+    labelTolerancia.pack()
+    entradaTolera.pack()
+    espacio.pack()
+    boton.pack()
 
-def llamarRaicesMultiples():
-    pass
+
+
+def llamarRaicesMultiples(funcion, df, ddf, x0, tolera,ventanaRaicesMultiples):
+    respuesta = raicesMultiples(funcion,df,ddf,x0,tolera)
+    respuesta = "Raiz en : " + str(respuesta[0] )
+    labelRaiz = tk.Label(ventanaRaicesMultiples, text=respuesta, fg="black", font=("Arial", 10))
+    labelRaiz.pack()
+    
     
 def pintarEliminacionGaussiana():
     ventanaEliminacionGauss = tk.Toplevel(window)
