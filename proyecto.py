@@ -441,7 +441,8 @@ def metodoSeleccionado(event):
 window = Tk()
 
 window.title("Métodos Numéricos")
-window.state('zoomed')
+window.geometry("500x280")
+#window.state('zoomed')
 
 titulo = tk.Label(window, text="Métodos Numéricos", fg="black", font=("Arial", 30))
 titulo.config(anchor=CENTER)
