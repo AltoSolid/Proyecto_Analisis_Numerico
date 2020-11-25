@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 #Métodos de Ecuaciones de una variable
 from ecuaciones_una_variable.biseccion import biseccion
 from ecuaciones_una_variable.reglafalsa import reglafalsa
@@ -17,7 +18,10 @@ from sistemas_de_ecuaciones.LUSimple import LU_simple
 from sistemas_de_ecuaciones.Cholesky import Cholesky
 from sistemas_de_ecuaciones.Crout import Crout
 from sistemas_de_ecuaciones.Doolittle import Doolittle
-
+#Métodos de Interpolación
+from interpolacion.DiferenciasDivididas import Diferencias_divididas
+from interpolacion.Lagrange import Lagrange
+from interpolacion.Vandermonde import Vandermonde
 
 def pintarBiseccion():
     ventanaBiseccion = tk.Toplevel(window)
@@ -446,24 +450,135 @@ def llamarGaussSeidel(matrizA, matrizB, x0, tolera, ventanaGaussSeidel):
     labelSolucion.pack()
     
 def pintarVandermonde():
-    pass
+    ventanaVandermonde = tk.Toplevel(window)
+    ventanaVandermonde.title("Vandermonde")
+    labelTitulo = tk.Label(ventanaVandermonde, text="Vandermonde", fg="black", font=("Arial", 15))
+    label_datos_xi = tk.Label(ventanaVandermonde, text="Enter the values of x", fg="black", font=("Arial", 10))
+    entrada_datos_xi= ttk.Entry(ventanaVandermonde)
+    label_datos_fi = tk.Label(ventanaVandermonde, text="Enter the values of fx", fg="black", font=("Arial", 10))
+    entrada_datos_fi= ttk.Entry(ventanaVandermonde)
+    espacio = tk.Label(ventanaVandermonde, text="")
+    boton = tk.Button(ventanaVandermonde, text = "Calculate", command =lambda:llamarDiferenciasDivididas(entrada_datos_xi.get(),entrada_datos_fi.get(),ventanaVandermonde))
 
-def llamarVandermonde():
-    pass
-    
+    labelTitulo.pack()
+    label_datos_xi.pack()
+    entrada_datos_xi.pack()
+    label_datos_fi.pack()
+    entrada_datos_fi.pack()
+    espacio.pack()
+    boton.pack()
+
+def llamarVandermonde(xi,fi,ventanaVandermonde):
+    try:
+        xi_val = []
+        fi_val = []
+        xi_sp = xi.split(',')
+        fi_sp = fi.split(',')
+        for i in xi_sp:
+            xi_val.append(float(i))
+        for i in fi_sp:
+            fi_val.append(float(i))
+        print(xi_val,fi_val)
+        vandermonde =  Vandermonde(xi_val,fi_val)
+        vandermonde.vandermonde()
+        labelMensaje = tk.Label(ventanaVandermonde, text="", fg="black", font=("Arial", 10))
+        labelSolucion = tk.Label(ventanaVandermonde, text=vandermonde.respuesta, fg="black", font=("Arial", 10))
+
+        labelMensaje.pack()
+        labelSolucion.pack()
+    except ValueError:
+      
+        ventanaVandermonde.destroy()
+        messagebox.showerror("Error"," Enter the correct values")
+        pintarVandermonde()
+   
 def pintarLagrange():
-    pass
+    ventanaLagrange = tk.Toplevel(window)
+    ventanaLagrange.title("Lagrange Method")
+    labelTitulo = tk.Label(ventanaLagrange, text="lagrange", fg="black", font=("Arial", 15))
+    label_datos_xi = tk.Label(ventanaLagrange, text="Enter the values of x", fg="black", font=("Arial", 10))
+    entrada_datos_xi= ttk.Entry(ventanaLagrange)
+    label_datos_fi = tk.Label(ventanaLagrange, text="Enter the values of fx", fg="black", font=("Arial", 10))
+    entrada_datos_fi= ttk.Entry(ventanaLagrange)
+    espacio = tk.Label(ventanaLagrange, text="")
+    boton = tk.Button(ventanaLagrange, text = "Calculate", command =lambda:llamarDiferenciasDivididas(entrada_datos_xi.get(),entrada_datos_fi.get(),ventanaLagrange))
 
-def llamarLagrange():
-    pass
+    labelTitulo.pack()
+    label_datos_xi.pack()
+    entrada_datos_xi.pack()
+    label_datos_fi.pack()
+    entrada_datos_fi.pack()
+    espacio.pack()
+    boton.pack()
+
+def llamarLagrange(xi,fi,ventanaLagrange):
+    try:
+        xi_val = []
+        fi_val = []
+        xi_sp = xi.split(',')
+        fi_sp = fi.split(',')
+        for i in xi_sp:
+            xi_val.append(float(i))
+        for i in fi_sp:
+            fi_val.append(float(i))
+        print(xi_val,fi_val)
+        lagrange =  Lagrange(xi_val,fi_val)
+        lagrange.lagrange()
+        labelMensaje = tk.Label(ventanaLagrange, text="", fg="black", font=("Arial", 10))
+        labelSolucion = tk.Label(ventanaLagrange, text=lagrange.respuesta, fg="black", font=("Arial", 10))
+
+        labelMensaje.pack()
+        labelSolucion.pack()
+    except ValueError:
+      
+        ventanaLagrange.destroy()
+        messagebox.showerror("Error"," Enter the correct values")
+        pintarLagrange()
     
 def pintarDiferenciasDivididas():
-    pass
 
-def llamarDiferenciasDivididas():
-    pass
+    ventanaDiferenciasDivididas = tk.Toplevel(window)
+    ventanaDiferenciasDivididas.title("Divided differences")
+    labelTitulo = tk.Label(ventanaDiferenciasDivididas, text="Divided differences", fg="black", font=("Arial", 15))
+    label_datos_xi = tk.Label(ventanaDiferenciasDivididas, text="Enter the values of x", fg="black", font=("Arial", 10))
+    entrada_datos_xi= ttk.Entry(ventanaDiferenciasDivididas)
+    label_datos_fi = tk.Label(ventanaDiferenciasDivididas, text="Enter the values of fx", fg="black", font=("Arial", 10))
+    entrada_datos_fi= ttk.Entry(ventanaDiferenciasDivididas)
+    espacio = tk.Label(ventanaDiferenciasDivididas, text="")
+    boton = tk.Button(ventanaDiferenciasDivididas, text = "Calculate", command =lambda:llamarDiferenciasDivididas(entrada_datos_xi.get(),entrada_datos_fi.get(),ventanaDiferenciasDivididas))
+
+    labelTitulo.pack()
+    label_datos_xi.pack()
+    entrada_datos_xi.pack()
+    label_datos_fi.pack()
+    entrada_datos_fi.pack()
+    espacio.pack()
+    boton.pack()
+
+def llamarDiferenciasDivididas(xi,fi,ventanaDiferenciasDivididas):
+    try:
+        xi_val = []
+        fi_val = []
+        xi_sp = xi.split(',')
+        fi_sp = fi.split(',')
+        for i in xi_sp:
+            xi_val.append(float(i))
+        for i in fi_sp:
+            fi_val.append(float(i))
+        print(xi_val,fi_val)
+        diferencias_divididas = Diferencias_divididas(xi_val,fi_val)
+        diferencias_divididas.diferencias_divididas()
+        labelMensaje = tk.Label(ventanaDiferenciasDivididas, text="", fg="black", font=("Arial", 10))
+        labelSolucion = tk.Label(ventanaDiferenciasDivididas, text=diferencias_divididas.respuesta, fg="black", font=("Arial", 10))
+
+        labelMensaje.pack()
+        labelSolucion.pack()
+    except ValueError:
+      
+        ventanaDiferenciasDivididas.destroy()
+        messagebox.showerror("Error"," Enter the correct values")
+        pintarDiferenciasDivididas()
     
-
 def metodoSeleccionado(event):
     seleccion = event.widget.get()
     if(seleccion == "Bisection"):

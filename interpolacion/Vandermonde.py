@@ -3,16 +3,14 @@ import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
 
-# Crear clase para onstanciar 
 #Parametros de entrada 
-
-
 
 class Vandermonde:
 
     def __init__(self,xi,fi):
         self.xi = xi
         self.fi = fi
+        self.respuesta = ""
 
     def vandermonde(self):
         muestras = 101 #Tramos+1
@@ -47,7 +45,8 @@ class Vandermonde:
         b = np.max(self.xi)
         xin = np.linspace(a,b,muestras)
         yin = px(xin)
-            
+
+        self.respuesta = polinomio
         # Mostrar
         print('Matriz Vandermonde: ')
         print(D)

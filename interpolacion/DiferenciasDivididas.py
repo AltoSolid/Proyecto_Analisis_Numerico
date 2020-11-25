@@ -4,14 +4,13 @@ import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
 
-
-#Crear una clase para instanciarlo
 #Datos de prueba
 
 class Diferencias_divididas:
     def __init__(self,xi,fi):
         self.xi = xi
         self.fi = fi
+        self.respuesta = ""
     
     def diferencias_divididas(self):
         '''
@@ -71,8 +70,9 @@ class Diferencias_divididas:
         b = np.max(self.xi)
         pxi = np.linspace(a,b,muestras)
         pfi = px(pxi)
-
+        self.respuesta= polisimple
         # SALIDA
+        
         np.set_printoptions(precision = 4)
         print('Tabla Diferencia Dividida')
         print([titulo])
@@ -90,7 +90,7 @@ class Diferencias_divididas:
         plt.legend()
         plt.xlabel('xi')
         plt.ylabel('fi')
-        plt.title('Diferencias Divididas - Newton')
+        plt.title(str(polisimple))
         plt.show()
 
 

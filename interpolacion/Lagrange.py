@@ -3,15 +3,14 @@ import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
 
-#Crear clase para instanciar
 #Datos de prueba
-
 
 class Lagrange:
 
     def __init__(self,xi,fi):
         self.xi = xi
-        self.fi = fi    
+        self.fi = fi
+        self.respuesta = ""
     
     def lagrange(self):
         n = len(self.xi)
@@ -40,7 +39,7 @@ class Lagrange:
         b = np.max(self.xi)
         pxi = np.linspace(a,b,muestras)
         pfi = px(pxi)
-
+        self.respuesta = polisimple
         # Salida
         print('Valores de fi: ',self.fi)
         print('Divisores en L(i): ',divisorL)
