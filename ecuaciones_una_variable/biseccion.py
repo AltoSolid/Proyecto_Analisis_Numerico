@@ -12,9 +12,15 @@ def biseccion(funcion,a, b, tolera=0.001):
     a = eval(a)
     b = eval(b)
     tolera = eval(tolera)
-    #a = int(a)
-    #b = int(b)
-    # fx = lambda x: x*3 + 4*x*2 - 10 
+
+    #f(a) * f(b) < 0 ; Converge     
+    if (a == b):
+        error1 = " [{0} , {1}] No es un intervalo".format(a,b)
+        return error1
+
+    if ((fx(a) * fx(b)) >= 0):
+        error2 = "El método no converge con el intervalo [{0} , {1}]. f({0}) * f({1}) > 0".format(a,b)
+        return error2
 
     # PROCEDIMIENTO
     tramo = b-a
@@ -31,10 +37,15 @@ def biseccion(funcion,a, b, tolera=0.001):
             a = c
             b = b
         tramo = b-a
+    raiz = "There is a root in: {0}".format(c)
 
     # SALIDA
     #print('       raiz en: ', c)
     #print('error en tramo: ', tramo)
-    return (c,tramo)
+    # tramo -> es el error
+    
+    return raiz
+
+
 
 #biseccion("x*3 + 4*x*2 - 10" ,"1","2")

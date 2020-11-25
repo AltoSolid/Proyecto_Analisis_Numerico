@@ -1,11 +1,7 @@
-# Algoritmo de punto fijo
-# [a,b] intervalo de búsqueda
-# error = tolera
-
 import numpy as np
 
 
-def puntofijo(funcion,a,tolera, iteramax = 15):
+def puntofijo(funcion,a,tolera, iteramax = 100):
     gx = lambda x: eval(funcion)
     a = eval(a)
     tolera = eval(tolera)
@@ -24,18 +20,6 @@ def puntofijo(funcion,a,tolera, iteramax = 15):
     return(respuesta)
 
 # PROGRAMA ---------
-
-# INGRESO
-"""fx = lambda x: np.exp(-x) - x
-gx = lambda x: np.exp(-x)
-
-a = 0       # intervalo
-b = 1
-tolera = 0.001
-iteramax  = 15      # itera máximo
-muestras = 51  # gráfico
-
-tramos = 51"""
 
 # PROCEDIMIENTO
 #respuesta = puntofijo("x**3+4*x**2-10",0,0.001)

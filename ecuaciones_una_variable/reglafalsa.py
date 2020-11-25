@@ -10,6 +10,16 @@ def reglafalsa(funcion,a, b, tolera=0.001):
     b = eval(b)
     tolera = eval(tolera)
     # PROCEDIMIENTO
+    
+    #f(a) * f(b) < 0 ; Converge     
+    if (a == b):
+        error1 = " [{0} , {1}] No es un intervalo".format(a,b)
+        return error1
+
+    if ((fx(a) * fx(b)) >= 0):
+        error2 = "El método no converge con el intervalo [{0} , {1}]. f({0}) * f({1}) > 0".format(a,b)
+        return error2
+    
     tramo = abs(b-a)
     while not(tramo<=tolera):
         fa = fx(a)
@@ -23,10 +33,11 @@ def reglafalsa(funcion,a, b, tolera=0.001):
         else:
             tramo = abs(b-c)
             b=c
-    raiz = c
+    raiz = "There is a root in: {0}".format(c)
 
     # SALIDA
-    return c
+    return raiz
+    
     #print("Raiz {0}".format(raiz))
 
 #reglafalsa("x**3 + 4*x**2 - 10" ,1,2)

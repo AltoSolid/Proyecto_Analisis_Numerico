@@ -1,9 +1,4 @@
-# Método de Gauss
-# Solución a Sistemas de Ecuaciones
-# de la forma A.X=B
-
 import numpy as np
-
 
 def pivoteoParcial(matrizA, matrizB):
 # INGRESO
@@ -59,7 +54,6 @@ def pivoteoParcial(matrizA, matrizB):
         X[i] = (b-suma)/AB[i,i]
 
     X = np.transpose([X])
-
 
     # SALIDA
     """print('Matriz aumentada:')

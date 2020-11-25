@@ -13,7 +13,7 @@ from sistemas_de_ecuaciones.gauss import gauss
 from sistemas_de_ecuaciones.gaussSeidel import gauss_seidel
 from sistemas_de_ecuaciones.jacobi import jacobi
 from sistemas_de_ecuaciones.pivoteoParcial import pivoteoParcial
-from sistemas_de_ecuaciones.LUSimple import LUSimple
+from sistemas_de_ecuaciones.LUSimple import LU_simple
 from sistemas_de_ecuaciones.Cholesky import Cholesky
 from sistemas_de_ecuaciones.Crout import Crout
 from sistemas_de_ecuaciones.Doolittle import Doolittle
@@ -48,7 +48,7 @@ def pintarBiseccion():
     
 def llamarBiseccion(funcion, a, b, tolera, ventanaBiseccion):
     respuesta = biseccion(funcion, a, b, tolera)
-    respuesta = "There is a root in: " + str(respuesta[0])
+    respuesta = str(respuesta)
     labelRaiz = tk.Label(ventanaBiseccion, text=respuesta, fg="black", font=("Arial", 10))
     labelRaiz.pack()
     #labelTolerancia = tk.Label(ventanaBiseccion, text=respuesta[1], fg="black", font=("Arial", 10))
@@ -83,17 +83,17 @@ def pintarReglaFalsa():
 
 def llamarReglaFalsa(funcion, a, b, tolera, ventanaReglaFalsa):
     respuesta = reglafalsa(funcion, a, b, tolera)
-    respuesta = "There is a root in: " + str(respuesta)
+    respuesta = str(respuesta)
     labelRaiz = tk.Label(ventanaReglaFalsa, text=respuesta, fg="black", font=("Arial", 10))
     labelRaiz.pack()
     
 def pintarPuntoFijo():
     ventanaPuntoFijo = tk.Toplevel(window)
-    ventanaPuntoFijo.title("Fixed-Point Iteration Method")
-    labelTitulo = tk.Label(ventanaPuntoFijo, text="Fixed-Point Iteration Method", fg="black", font=("Arial", 15))
-    labelFuncion = tk.Label(ventanaPuntoFijo, text="Enter function", fg="black", font=("Arial", 10))
+    ventanaPuntoFijo.title("Fixed Point Method")
+    labelTitulo = tk.Label(ventanaPuntoFijo, text="Fixed Point Method", fg="black", font=("Arial", 15))
+    labelFuncion = tk.Label(ventanaPuntoFijo, text="Enter x = g(x)", fg="black", font=("Arial", 10))
     entradaFuncion = ttk.Entry(ventanaPuntoFijo)
-    labelLimiteInferior = tk.Label(ventanaPuntoFijo, text="Enter lower limit", fg="black", font=("Arial", 10))
+    labelLimiteInferior = tk.Label(ventanaPuntoFijo, text="Enter starting point", fg="black", font=("Arial", 10))
     entradaA = ttk.Entry(ventanaPuntoFijo)
     labelTolerancia = tk.Label(ventanaPuntoFijo, text="Enter tolerance", fg="black", font=("Arial", 10))
     entradaTolera = ttk.Entry(ventanaPuntoFijo)
@@ -124,7 +124,7 @@ def pintarNewton():
     entradaFuncion = ttk.Entry(ventanaNewton)
     labelDFuncion = tk.Label(ventanaNewton, text="Enter function derivative", fg="black", font=("Arial", 10))
     entradaDFuncion = ttk.Entry(ventanaNewton)
-    labelLimiteInferior = tk.Label(ventanaNewton, text="Enter lower limit", fg="black", font=("Arial", 10))
+    labelLimiteInferior = tk.Label(ventanaNewton, text="Enter starting point", fg="black", font=("Arial", 10))
     entradaA = ttk.Entry(ventanaNewton)
     labelTolerancia = tk.Label(ventanaNewton, text="Enter tolerance", fg="black", font=("Arial", 10))
     entradaTolera = ttk.Entry(ventanaNewton)
@@ -152,10 +152,10 @@ def llamarNewton(funcion, dfuncion, x0, tolera, ventanaNewton):
 def pintarSecante():
     ventanaSecante = tk.Toplevel(window)
     ventanaSecante.title("Secant Methd")
-    labelTitulo = tk.Label(ventana, text="Secant Methd", fg="black", font=("Arial", 15))
+    labelTitulo = tk.Label(ventanaSecante, text="Secant Methd", fg="black", font=("Arial", 15))
     labelFuncion = tk.Label(ventanaSecante, text="Enter function", fg="black", font=("Arial", 10))
     entradaFuncion = ttk.Entry(ventanaSecante)
-    labelLimiteInferior = tk.Label(ventanaSecante, text="Enter lower limit", fg="black", font=("Arial", 10))
+    labelLimiteInferior = tk.Label(ventanaSecante, text="Enter value 1", fg="black", font=("Arial", 10))
     entradaA = ttk.Entry(ventanaSecante)
     labelTolerancia = tk.Label(ventanaSecante, text="Enter tolerance", fg="black", font=("Arial", 10))
     entradaTolera = ttk.Entry(ventanaSecante)
@@ -218,7 +218,7 @@ def llamarRaicesMultiples(funcion, df, ddf, x0, tolera,ventanaRaicesMultiples):
 def pintarEliminacionGaussiana():
     ventanaEliminacionGauss = tk.Toplevel(window)
     ventanaEliminacionGauss.title("Gaussian Elimination Method")
-    labelTitulo = tk.Label(ventanaEliminacionGaussian, text="Gaussian Elimination Method", fg="black", font=("Arial", 15))
+    labelTitulo = tk.Label(ventanaEliminacionGauss, text="Gaussian Elimination Method", fg="black", font=("Arial", 15))
     labelMatrizA = tk.Label(ventanaEliminacionGauss, text="Enter Matrix A", fg="black", font=("Arial", 10))
     entradaMatrizA = ttk.Entry(ventanaEliminacionGauss)
     espacio = tk.Label(ventanaEliminacionGauss, text="")
@@ -285,7 +285,7 @@ def pintarLU():
     boton.pack()
 
 def llamarLU(A, ventanaLU):
-    respuesta = LUSimple(A)
+    respuesta = LU_simple(A)
     labelMensaje = tk.Label(ventanaLU, text="Solution:", fg="black", font=("Arial", 10))
     labelSolucion = tk.Label(ventanaLU, text=respuesta, fg="black", font=("Arial", 10))
     labelMensaje.pack()
@@ -468,9 +468,9 @@ def metodoSeleccionado(event):
     seleccion = event.widget.get()
     if(seleccion == "Bisection"):
         pintarBiseccion()
-    elif(seleccion == "Position Method"):
+    elif(seleccion == "False Position Method"):
         pintarReglaFalsa()
-    elif(seleccion == "Fixed-Point Iteration"):
+    elif(seleccion == "Fixed Point Method"):
         pintarPuntoFijo()
     elif(seleccion == "Newton"):
         pintarNewton()
@@ -519,7 +519,7 @@ tituloLista = tk.Label(window, text="Select a method", fg="black")
 tituloLista.config(anchor=CENTER)
 tituloLista.pack()
 
-lista = ttk.Combobox(window, values=["Bisection", "Position Method", "Fixed-Point Iteration", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "divided differences(Newton)"])
+lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixed Point Method", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "divided differences(Newton)"])
 lista.pack()
 lista.current()
 lista.bind("<<ComboboxSelected>>", metodoSeleccionado)
