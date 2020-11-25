@@ -41,20 +41,20 @@ class Lagrange:
         pfi = px(pxi)
         self.respuesta = polisimple
         # Salida
-        print('Valores de fi: ',self.fi)
-        print('Divisores en L(i): ',divisorL)
+        print('fi values: ',self.fi)
+        print('Dividers into L(i): ',divisorL)
         print()
-        print('Polinomio de Lagrange, expresiones')
+        print('Lagrange Polynomial, expressions')
         print(polinomio)
         print()
-        print('Polinomio de Lagrange: ')
+        print('Lagrange Polynomial: ')
         print(polisimple)
 
         # Gráfica
-        plt.plot(self.xi,self.fi,'o', label = 'Puntos')
-        plt.plot(pxi,pfi, label = 'Polinomio')
+        plt.plot(self.xi,self.fi,'o', label = 'Points')
+        plt.plot(pxi,pfi, label = 'Polynomial')
         plt.legend()
         plt.xlabel('xi')
         plt.ylabel('fi')
-        plt.title('Interpolación Lagrange')
+        plt.title('Lagrange Interpolation')
         plt.show()

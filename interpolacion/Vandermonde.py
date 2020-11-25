@@ -48,11 +48,11 @@ class Vandermonde:
 
         self.respuesta = polinomio
         # Mostrar
-        print('Matriz Vandermonde: ')
+        print('Matrix Vandermonde: ')
         print(D)
-        print('Los coeficientes del polinomio: ')
+        print('Coefficients of the polynomial: ')
         print(coeficiente)
-        print('Polinomio de interpolación: ')
+        print('Interpolation polynomial: ')
         print(polinomio)
 
         # Grafica

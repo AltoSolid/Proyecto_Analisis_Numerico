@@ -34,15 +34,15 @@ def raicesMultiples(f,dx,ddx,x0,tol,t_error=1):
         resultados.append([cont,x0,y0,dx0,ddx0,den,error])
     #imprimir(['Iteración','xn','f(xn)',"f'(xi)","f''(xn)",'den','Error'],resultados)
     if y0 == 0:
-        print (x0, " Es una raiz")
+        print (x0, " It's a root")
     elif error <= tol:
-        print (x0, " Es aproximacion a una raiz con una tolerancia = ",tol)
+        print (x0, " It's approximation to a root with a tolerance = ",tol)
     elif dx0 == 0:
-        print (x0, " Es una posible raiz multiple")
+        print (x0, " It's a possible multiple root")
     elif ddx0 == 0:
-        print (x0, " Es una posible raiz multiple")
+        print (x0, " It's a possible multiple root")
     elif den == 0:
-        print ("El denominador se hizo 0")
+        print ("The denominator was made 0")
     #elif cont > niter:
         #print ("Fracaso el numero de iteraciones")
     print(x0)

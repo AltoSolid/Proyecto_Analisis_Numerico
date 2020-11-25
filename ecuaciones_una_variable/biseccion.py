@@ -15,11 +15,11 @@ def biseccion(funcion,a, b, tolera=0.001):
 
     #f(a) * f(b) < 0 ; Converge     
     if (a == b):
-        error1 = " [{0} , {1}] No es un intervalo".format(a,b)
+        error1 = " [{0} , {1}] It isn't an interval".format(a,b)
         return error1
 
     if ((fx(a) * fx(b)) >= 0):
-        error2 = "El método no converge con el intervalo [{0} , {1}]. f({0}) * f({1}) > 0".format(a,b)
+        error2 = "The method doesn't converge with the interval [{0} , {1}]. f({0}) * f({1}) > 0".format(a,b)
         return error2
 
     # PROCEDIMIENTO

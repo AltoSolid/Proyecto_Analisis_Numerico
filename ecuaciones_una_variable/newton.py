@@ -13,7 +13,7 @@ def newton(funcion, dfuncion, x0, tolera):
     tabla = []
     tramo = abs(2*tolera)
     xi = x0
-    error = "Error: División por 0 en la derivada"
+    error = "Error: Division by 0 in the derivative"
     while (tramo>=tolera):
         if dfx(xi) == 0:
             return error

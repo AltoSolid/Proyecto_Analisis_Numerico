@@ -615,7 +615,7 @@ def metodoSeleccionado(event):
         pintarVandermonde()
     elif(seleccion == "Lagrange"):
         pintarLagrange()
-    elif(seleccion == "divided differences(Newton)"):
+    elif(seleccion == "Divided Differences(Newton)"):
         pintarDiferenciasDivididas()
     else: 
         print("No method was painted...")
@@ -623,7 +623,7 @@ def metodoSeleccionado(event):
 window = Tk()
 
 window.title("Numerical Methods")
-window.geometry("500x280")
+window.geometry("500x290")
 #window.state('zoomed')
 
 titulo = tk.Label(window, text="Numerical Methods", fg="black", font=("Arial", 30))
@@ -634,7 +634,7 @@ tituloLista = tk.Label(window, text="Select a method", fg="black")
 tituloLista.config(anchor=CENTER)
 tituloLista.pack()
 
-lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixed Point Method", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "divided differences(Newton)"])
+lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixed Point Method", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "Divided Differences(Newton)"])
 lista.pack()
 lista.current()
 lista.bind("<<ComboboxSelected>>", metodoSeleccionado)

@@ -14,8 +14,8 @@ class Diferencias_divididas:
     
     def diferencias_divididas(self):
         '''
-        Ingesar el vector de los valores de x
-        Ingresar el vector de y
+        Enter the vector of the values of x
+        Enter the vector of y
         '''
 
                 # Tabla de Diferencias Divididas Avanzadas
@@ -77,16 +77,16 @@ class Diferencias_divididas:
         print('Tabla Diferencia Dividida')
         print([titulo])
         print(tabla)
-        print('dDividida: ')
+        print('dividedD: ')
         print(dDividida)
-        print('polinomio: ')
+        print('polynomial: ')
         print(polinomio)
-        print('polinomio simplificado: ' )
+        print('simplified polynomial: ' )
         print(polisimple)
 
         # Gráfica
-        plt.plot(self.xi,self.fi,'o', label = 'Puntos')
-        plt.plot(pxi,pfi, label = 'Polinomio')
+        plt.plot(self.xi,self.fi,'o', label = 'Points')
+        plt.plot(pxi,pfi, label = 'polynomial')
         plt.legend()
         plt.xlabel('xi')
         plt.ylabel('fi')
