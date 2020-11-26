@@ -1,14 +1,14 @@
 import numpy as np
+import decimal
 
-
-def puntofijo(funcion,a,tolera, iteramax = 100):
+def puntofijo(funcion,a,tolera, iteramax = 40):
     gx = lambda x: eval(funcion)
     a = eval(a)
     tolera = eval(tolera)
     i = 1 # iteración
     b = gx(a)
     tramo = abs(b-a)
-    while(tramo>=tolera and i<=iteramax ):
+    while(tramo>=tolera and i<=iteramax):
         a = b
         b = gx(a)
         tramo = abs(b-a)
@@ -16,7 +16,7 @@ def puntofijo(funcion,a,tolera, iteramax = 100):
     respuesta = b
     # Validar respuesta
     if (i>=iteramax ):
-        respuesta = np.nan
+       respuesta = np.nan
     return(respuesta)
 
 # PROGRAMA ---------

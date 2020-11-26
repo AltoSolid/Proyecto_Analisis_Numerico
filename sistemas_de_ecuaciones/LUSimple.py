@@ -10,11 +10,13 @@ class LU_simple:
 
     def __init__(self,A):
         self.A = A 
+        self.respuestaX = []
+        self.respuestaz = []
 
     def sacarB(self,a):
         b = []
         for i in range(len(self.A)):
-            b.append(A[i][len(self.A)-1])
+            b.append(self.A[i][len(self.A)-1])
         return b
 
     def crearListaUnos(self,n):
@@ -52,21 +54,23 @@ class LU_simple:
             print(suma)
     
     def lu_simple(self):
-        P, L, U = scipy.linalg.lu(A)
-        print ("A:")
-        pprint.pprint(self.A)
-        print(type(self.A))
-        print ("P:")
-        pprint.pprint(P)
+        P, L, U = scipy.linalg.lu(self.A)
+        # print ("A:")
+        # pprint.pprint(self.A)
+        # print(type(self.A))
+        # print ("P:")
+        # pprint.pprint(P)
 
-        print ("L:")
-        pprint.pprint(L)
+        # print ("L:")
+        # pprint.pprint(L)
 
-        print ("U:")
-        pprint.pprint(U)
+        # print ("U:")
+        # pprint.pprint(U)
 
         b = self.sacarB(self.A)
         Z = np.array(self.sustitucionProgresiva(U,b,len(U)))
         X = self.sustitucionRegresiva(U,Z,len(L))
-        print("Z:",Z)
-        print("X:",X)
+        self.respuestaz = Z
+        self.respuestaX = X
+        # print("Z:",Z)
+        # print("X:",X)

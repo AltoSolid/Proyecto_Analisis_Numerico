@@ -22,6 +22,10 @@ from sistemas_de_ecuaciones.Doolittle import Doolittle
 from interpolacion.DiferenciasDivididas import Diferencias_divididas
 from interpolacion.Lagrange import Lagrange
 from interpolacion.Vandermonde import Vandermonde
+#Métodos extra
+from extras.trapecio import trapecio
+from extras.simpson13 import simpson1_3
+from extras.simpson38 import simpson_3_8 
 
 def pintarBiseccion():
     ventanaBiseccion = tk.Toplevel(window)
@@ -267,12 +271,6 @@ def llamarPivoteoParcial(matrizA, matrizB, ventanaPivoteoParcial):
     labelMensaje.pack()
     labelSolucion.pack()
     
-def pintarPivoteoTotal():
-    pass
-
-def llamarPivoteoTotal():
-    pass
-    
 def pintarLU():
     ventanaLU = tk.Toplevel(window)
     ventanaLU.title("LU Gaussian Factorization Method")
@@ -289,11 +287,29 @@ def pintarLU():
     boton.pack()
 
 def llamarLU(A, ventanaLU):
-    respuesta = LU_simple(A)
-    labelMensaje = tk.Label(ventanaLU, text="Solution:", fg="black", font=("Arial", 10))
-    labelSolucion = tk.Label(ventanaLU, text=respuesta, fg="black", font=("Arial", 10))
-    labelMensaje.pack()
-    labelSolucion.pack()
+    matriz = []
+    columnas = []
+    filas = A.split(';')
+    for i in filas:
+        columnas.append( i.split(','))
+    
+    print(columnas)
+    for i in columnas:
+        final = []
+        for j in i:
+            final.append(int(j))
+        matriz.append(final)
+    print(matriz)
+    respuesta = LU_simple(matriz)
+    respuesta.lu_simple()
+    labelMensajex = tk.Label(ventanaLU, text="Solution X:", fg="black", font=("Arial", 10))
+    labelSolucionx = tk.Label(ventanaLU, text=str(respuesta.respuestaX), fg="black", font=("Arial", 10))
+    labelMensajez = tk.Label(ventanaLU, text="Solution Z:", fg="black", font=("Arial", 10))
+    labelSolucionz = tk.Label(ventanaLU, text=str(respuesta.respuestaz), fg="black", font=("Arial", 10))
+    labelMensajex.pack()
+    labelSolucionx.pack()
+    labelMensajez.pack()
+    labelSolucionz.pack()
     
 def pintarCholesky():
     ventanaCholesky = tk.Toplevel(window)
@@ -301,12 +317,12 @@ def pintarCholesky():
     labelTitulo = tk.Label(ventanaCholesky, text="Cholesky Factorization Method", fg="black", font=("Arial", 15))
     labelMatrizA = tk.Label(ventanaCholesky, text="Enter Matrix A", fg="black", font=("Arial", 10))
     entradaMatrizA = ttk.Entry(ventanaCholesky)
-    labelMatrizB = tk.Label(ventanaCholesky, text="Enter Matrix B", fg="black", font=("Arial", 10))
+    labelMatrizB = tk.Label(ventanaCholesky, text="Enter the vector b of independent terms", fg="black", font=("Arial", 10))
     entradaMatrizB = ttk.Entry(ventanaCholesky)
     labelN = tk.Label(ventanaCholesky, text="Enter value of n", fg="black", font=("Arial", 10))
     entradaN = ttk.Entry(ventanaCholesky)
     espacio = tk.Label(ventanaCholesky, text="")
-    boton = tk.Button(ventanaCholesky, text = "Calculate", command = lambda: llamarCholesky(entradaMatrizA.get(), entradaMatrizB.get(), entradaN.get(), ventanaCholesky))
+    boton = tk.Button(ventanaCholesky, text = "Calculate", command = lambda: llamarCholesky(entradaN.get(), entradaMatrizA.get(), entradaMatrizB.get(), ventanaCholesky))
 
     labelTitulo.pack()
     labelMatrizA.pack()
@@ -319,9 +335,28 @@ def pintarCholesky():
     boton.pack()    
 
 def llamarCholesky(n, A, B, ventanaCholesky):
-    respuesta = Cholesky(n, A, B)
+    matriz = []
+    columnas = []
+    b = []
+    filas = A.split(';')
+    for i in filas:
+        columnas.append( i.split(','))
+    
+    print(columnas)
+    for i in columnas:
+        final = []
+        for j in i:
+            final.append(float(j))
+        matriz.append(final)
+    bs = B.split(',')
+    for i in bs:
+        b.append(float(i))
+    print(b)
+    print(matriz)
+    respuesta = Cholesky(n, matriz, b)
+    respuesta_segundaria = (respuesta.cholesky())
     labelMensaje = tk.Label(ventanaCholesky, text="The solution to factoring is:", fg="black", font=("Arial", 10))
-    labelSolucion = tk.Label(ventanaCholesky, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaCholesky, text=respuesta_segundaria, fg="black", font=("Arial", 10))
     labelMensaje.pack()
     labelSolucion.pack()
     
@@ -331,12 +366,12 @@ def pintarCrout():
     labelTitulo = tk.Label(ventanaCrout, text="Crout Factorization Method", fg="black", font=("Arial", 15))
     labelMatrizA = tk.Label(ventanaCrout, text="Enter Matrix A", fg="black", font=("Arial", 10))
     entradaMatrizA = ttk.Entry(ventanaCrout)
-    labelMatrizB = tk.Label(ventanaCrout, text="Enter Matrix B", fg="black", font=("Arial", 10))
+    labelMatrizB = tk.Label(ventanaCrout, text="Enter the vector b of independent terms", fg="black", font=("Arial", 10))
     entradaMatrizB = ttk.Entry(ventanaCrout)
     labelN = tk.Label(ventanaCrout, text="Enter value of n", fg="black", font=("Arial", 10))
     entradaN = ttk.Entry(ventanaCrout)
     espacio = tk.Label(ventanaCrout, text="")
-    boton = tk.Button(ventanaCrout, text = "Calculate", command = lambda: llamarCrout(entradaMatrizA.get(), entradaMatrizB.get(), entradaN.get(), ventanaCrout))
+    boton = tk.Button(ventanaCrout, text = "Calculate", command = lambda: llamarCrout(entradaN.get(), entradaMatrizA.get(), entradaMatrizB.get(), ventanaCrout))
 
     labelTitulo.pack()
     labelMatrizA.pack()
@@ -349,9 +384,28 @@ def pintarCrout():
     boton.pack()    
 
 def llamarCrout(n, A, B, ventanaCrout):
-    respuesta = Crout(n, A, B)
+    matriz = []
+    columnas = []
+    b = []
+    filas = A.split(';')
+    for i in filas:
+        columnas.append( i.split(','))
+    
+    print(columnas)
+    for i in columnas:
+        final = []
+        for j in i:
+            final.append(float(j))
+        matriz.append(final)
+    bs = B.split(',')
+    for i in bs:
+        b.append(float(i))
+    print(b)
+    print(matriz)
+    respuesta = Crout(n, matriz, b)
+    respuesta_segundaria = respuesta.crout()
     labelMensaje = tk.Label(ventanaCrout, text="The solution to factoring is:", fg="black", font=("Arial", 10))
-    labelSolucion = tk.Label(ventanaCrout, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaCrout, text=respuesta_segundaria, fg="black", font=("Arial", 10))
     labelMensaje.pack()
     labelSolucion.pack()
     
@@ -361,12 +415,12 @@ def pintarDoolittle():
     labelTitulo = tk.Label(ventanaDoolittle, text="Doolittle Factorization Method", fg="black", font=("Arial", 15))
     labelMatrizA = tk.Label(ventanaDoolittle, text="Enter Matrix A", fg="black", font=("Arial", 10))
     entradaMatrizA = ttk.Entry(ventanaDoolittle)
-    labelMatrizB = tk.Label(ventanaDoolittle, text="Enter Matrix B", fg="black", font=("Arial", 10))
+    labelMatrizB = tk.Label(ventanaDoolittle, text="Enter the vector b of independent terms", fg="black", font=("Arial", 10))
     entradaMatrizB = ttk.Entry(ventanaDoolittle)
     labelN = tk.Label(ventanaDoolittle, text="Enter value of n", fg="black", font=("Arial", 10))
     entradaN = ttk.Entry(ventanaDoolittle)
     espacio = tk.Label(ventanaDoolittle, text="")
-    boton = tk.Button(ventanaDoolittle, text = "Calculate", command = lambda: llamarDoolittle(entradaMatrizA.get(), entradaMatrizB.get(), entradaN.get(), ventanaDoolittle))
+    boton = tk.Button(ventanaDoolittle, text = "Calculate", command = lambda: llamarDoolittle(entradaN.get(), entradaMatrizA.get(), entradaMatrizB.get(), ventanaDoolittle))
 
     labelTitulo.pack()
     labelMatrizA.pack()
@@ -379,9 +433,28 @@ def pintarDoolittle():
     boton.pack()   
 
 def llamarDoolittle(n, A, B, ventanaDoolittle):
-    respuesta = Doolittle(n, A, B)
+    matriz = []
+    columnas = []
+    b = []
+    filas = A.split(';')
+    for i in filas:
+        columnas.append( i.split(','))
+    
+    print(columnas)
+    for i in columnas:
+        final = []
+        for j in i:
+            final.append(float(j))
+        matriz.append(final)
+    bs = B.split(',')
+    for i in bs:
+        b.append(float(i))
+    print(b)
+    print("Hola",matriz)
+    respuesta = Doolittle(n, matriz, b)
+    respuesta_segundaria = respuesta.doolittle()
     labelMensaje = tk.Label(ventanaDoolittle, text="The solution to factoring is:", fg="black", font=("Arial", 10))
-    labelSolucion = tk.Label(ventanaDoolittle, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion = tk.Label(ventanaDoolittle, text=respuesta_segundaria, fg="black", font=("Arial", 10))
     labelMensaje.pack()
     labelSolucion.pack()
     
@@ -579,6 +652,104 @@ def llamarDiferenciasDivididas(xi,fi,ventanaDiferenciasDivididas):
         messagebox.showerror("Error"," Enter the correct values")
         pintarDiferenciasDivididas()
     
+def pintarTrapecio():
+    ventanaTrapecio = tk.Toplevel(window)
+    ventanaTrapecio.title("Trapeze Method")
+    labelTitulo = tk.Label(ventanaTrapecio, text="Trapeze method", fg="black", font=("Arial", 15))
+    labelFuncion = tk.Label(ventanaTrapecio, text="Enter function", fg="black", font=("Arial", 10))
+    entradaFuncion = ttk.Entry(ventanaTrapecio)
+    labelLimiteInferior = tk.Label(ventanaTrapecio, text="Enter lower limit", fg="black", font=("Arial", 10))
+    entradaA = ttk.Entry(ventanaTrapecio)
+    labelLimiteSuperior = tk.Label(ventanaTrapecio, text="Enter upper limit", fg="black", font=("Arial", 10))
+    entradaB = ttk.Entry(ventanaTrapecio)
+    labelTramos = tk.Label(ventanaTrapecio, text="Enter sections", fg="black", font=("Arial", 10))
+    entradaTramo = ttk.Entry(ventanaTrapecio)
+    espacio = tk.Label(ventanaTrapecio, text="")
+    boton = tk.Button(ventanaTrapecio, text = "Calculate", command = lambda: llamarTrapecio(entradaFuncion.get(),entradaA.get(),entradaB.get(),entradaTramo.get(), ventanaTrapecio))
+    
+    labelTitulo.pack()
+    labelFuncion.pack()
+    entradaFuncion.pack()
+    labelLimiteInferior.pack()
+    entradaA.pack()
+    labelLimiteSuperior.pack()
+    entradaB.pack()
+    labelTramos.pack()
+    entradaTramo.pack()
+    espacio.pack()
+    boton.pack()
+    
+
+def llamarTrapecio(funcion, a, b, tramos, ventanaTrapecio):
+    respuesta = trapecio(funcion,a,b,tramos)
+    labelSolucion = tk.Label(ventanaTrapecio, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion.pack()
+    
+def pintarSimpson_1_3():
+    ventanaSimpson13 = tk.Toplevel(window)
+    ventanaSimpson13.title("Simpson 1/3 Method")
+    labelTitulo = tk.Label(ventanaSimpson13, text="Simpson 1/3 Method", fg="black", font=("Arial", 15))
+    labelFuncion = tk.Label(ventanaSimpson13, text="Enter function", fg="black", font=("Arial", 10))
+    entradaFuncion = ttk.Entry(ventanaSimpson13)
+    labelLimiteInferior = tk.Label(ventanaSimpson13, text="Enter lower limit", fg="black", font=("Arial", 10))
+    entradaA = ttk.Entry(ventanaSimpson13)
+    labelLimiteSuperior = tk.Label(ventanaSimpson13, text="Enter upper limit", fg="black", font=("Arial", 10))
+    entradaB = ttk.Entry(ventanaSimpson13)
+    labelTramos = tk.Label(ventanaSimpson13, text="Enter sections", fg="black", font=("Arial", 10))
+    entradaTramo = ttk.Entry(ventanaSimpson13)
+    espacio = tk.Label(ventanaSimpson13, text="")
+    boton = tk.Button(ventanaSimpson13, text = "Calculate", command = lambda: llamarSimpson_1_3(entradaFuncion.get(),entradaA.get(),entradaB.get(),entradaTramo.get(), ventanaSimpson13))
+    
+    labelTitulo.pack()
+    labelFuncion.pack()
+    entradaFuncion.pack()
+    labelLimiteInferior.pack()
+    entradaA.pack()
+    labelLimiteSuperior.pack()
+    entradaB.pack()
+    labelTramos.pack()
+    entradaTramo.pack()
+    espacio.pack()
+    boton.pack()
+
+def llamarSimpson_1_3(funcion, a, b, tramos, ventanaSimpson13):
+    respuesta = simpson1_3(funcion,a,b,tramos)
+    labelSolucion = tk.Label(ventanaSimpson13, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion.pack()
+
+def pintarSimpson_3_8():
+    ventanaSimpson38 = tk.Toplevel(window)
+    ventanaSimpson38.title("Simpson 3/8 Method")
+    labelTitulo = tk.Label(ventanaSimpson38, text="Simpson 3/8 Method", fg="black", font=("Arial", 15))
+    labelFuncion = tk.Label(ventanaSimpson38, text="Enter function", fg="black", font=("Arial", 10))
+    entradaFuncion = ttk.Entry(ventanaSimpson38)
+    labelLimiteInferior = tk.Label(ventanaSimpson38, text="Enter lower limit", fg="black", font=("Arial", 10))
+    entradaA = ttk.Entry(ventanaSimpson38)
+    labelLimiteSuperior = tk.Label(ventanaSimpson38, text="Enter upper limit", fg="black", font=("Arial", 10))
+    entradaB = ttk.Entry(ventanaSimpson38)
+    labelTramos = tk.Label(ventanaSimpson38, text="Enter sections", fg="black", font=("Arial", 10))
+    entradaTramo = ttk.Entry(ventanaSimpson38)
+    espacio = tk.Label(ventanaSimpson38, text="")
+    boton = tk.Button(ventanaSimpson38, text = "Calculate", command = lambda: llamarSimpson_3_8(entradaFuncion.get(),entradaA.get(),entradaB.get(),entradaTramo.get(), ventanaSimpson38))
+    
+    labelTitulo.pack()
+    labelFuncion.pack()
+    entradaFuncion.pack()
+    labelLimiteInferior.pack()
+    entradaA.pack()
+    labelLimiteSuperior.pack()
+    entradaB.pack()
+    labelTramos.pack()
+    entradaTramo.pack()
+    espacio.pack()
+    boton.pack()
+
+def llamarSimpson_3_8(funcion, a, b, tramos, ventanaSimpson38):
+    respuesta = simpson1_3(funcion,a,b,tramos)
+    labelSolucion = tk.Label(ventanaSimpson38, text=respuesta, fg="black", font=("Arial", 10))
+    labelSolucion.pack()
+
+
 def metodoSeleccionado(event):
     seleccion = event.widget.get()
     if(seleccion == "Bisection"):
@@ -597,8 +768,6 @@ def metodoSeleccionado(event):
         pintarEliminacionGaussiana()
     elif(seleccion == "Partial Pivoting"):
         pintarPivoteoParcial()
-    elif(seleccion == "Total Pivoting"):
-        pintarPivoteoTotal()
     elif(seleccion == "LU"):
         pintarLU()
     elif(seleccion == "Cholesky"):
@@ -617,6 +786,12 @@ def metodoSeleccionado(event):
         pintarLagrange()
     elif(seleccion == "Divided Differences(Newton)"):
         pintarDiferenciasDivididas()
+    elif(seleccion == "Trapeze rule"):
+        pintarTrapecio()
+    elif(seleccion == "Simpson 1/3"):
+        pintarSimpson_1_3()
+    elif(seleccion == "Simpson 3/8"):
+        pintarSimpson_3_8()              
     else: 
         print("No method was painted...")
 
@@ -634,7 +809,7 @@ tituloLista = tk.Label(window, text="Select a method", fg="black")
 tituloLista.config(anchor=CENTER)
 tituloLista.pack()
 
-lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixed Point Method", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "Divided Differences(Newton)"])
+lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixed Point Method", "Newton", "Secant", "Multiple Roots", "Gaussian Elimination", "Partial Pivoting", "Total Pivoting", "LU", "Cholesky", "Crout", "Doolittle", "Jacobi", "Gauss-Seidel", "Vandermonde", "Lagrange", "Divided Differences(Newton)", "Trapeze rule", "Simpson 1/3", "Simpson 3/8"])
 lista.pack()
 lista.current()
 lista.bind("<<ComboboxSelected>>", metodoSeleccionado)
