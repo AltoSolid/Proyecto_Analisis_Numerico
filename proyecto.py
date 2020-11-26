@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 #Métodos de Ecuaciones de una variable
 from ecuaciones_una_variable.biseccion import biseccion
 from ecuaciones_una_variable.reglafalsa import reglafalsa
@@ -798,8 +799,8 @@ def metodoSeleccionado(event):
 window = Tk()
 
 window.title("Numerical Methods")
-window.geometry("500x290")
-#window.state('zoomed')
+#window.geometry("500x290")
+window.state('zoomed')
 
 titulo = tk.Label(window, text="Numerical Methods", fg="black", font=("Arial", 30))
 titulo.config(anchor=CENTER)
@@ -813,5 +814,15 @@ lista = ttk.Combobox(window, values=["Bisection", "False Position Method", "Fixe
 lista.pack()
 lista.current()
 lista.bind("<<ComboboxSelected>>", metodoSeleccionado)
+
+espacio = tk.Label(window, text="")
+espacio.pack()
+espacio.pack()
+
+load = Image.open("img/among_us.png")
+render = ImageTk.PhotoImage(load)
+img_profe = Label(image=render)
+img_profe.pack()
+
 
 window.mainloop()
